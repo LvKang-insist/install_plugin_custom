@@ -1,6 +1,5 @@
 package com.studyyoun.install_plugin_custom
 
-
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -16,7 +15,6 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import io.flutter.plugin.common.PluginRegistry.Registrar
 import java.io.File
 import java.io.FileNotFoundException
 
@@ -32,7 +30,6 @@ class InstallPluginCustomPlugin() : MethodCallHandler, FlutterPlugin, ActivityAw
 
     private var activity: Activity? = null
     private val installRequestCode = 1234
-
 
     override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
@@ -57,7 +54,7 @@ class InstallPluginCustomPlugin() : MethodCallHandler, FlutterPlugin, ActivityAw
     private fun installApk(filePath: String?, appId: String?) {
         if (filePath == null) throw NullPointerException("fillPath is null!")
         val activity: Activity =
-                activity ?: throw NullPointerException("context is null!")
+            activity ?: throw NullPointerException("context is null!")
 
         val file = File(filePath)
         if (!file.exists()) throw FileNotFoundException("$filePath is not exist! or check permission")
@@ -73,7 +70,6 @@ class InstallPluginCustomPlugin() : MethodCallHandler, FlutterPlugin, ActivityAw
         }
     }
 
-
     private fun showSettingPackageInstall(activity: Activity) { // todo to test with android 26
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Log.d("SettingPackageInstall", ">= Build.VERSION_CODES.O")
@@ -83,7 +79,6 @@ class InstallPluginCustomPlugin() : MethodCallHandler, FlutterPlugin, ActivityAw
         } else {
             throw RuntimeException("VERSION.SDK_INT < O")
         }
-
     }
 
     private fun canRequestPackageInstalls(activity: Activity): Boolean {
@@ -127,11 +122,11 @@ class InstallPluginCustomPlugin() : MethodCallHandler, FlutterPlugin, ActivityAw
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        activity = binding.activity;
+        activity = binding.activity
         binding.addActivityResultListener { requestCode, resultCode, intent ->
             Log.d(
-                    "ActivityResultListener",
-                    "requestCode=$requestCode, resultCode = $resultCode, intent = $intent"
+                "ActivityResultListener",
+                "requestCode=$requestCode, resultCode = $resultCode, intent = $intent"
             )
             if (resultCode == Activity.RESULT_OK && requestCode == installRequestCode) {
                 install24(activity, apkFile, appId)
@@ -141,15 +136,9 @@ class InstallPluginCustomPlugin() : MethodCallHandler, FlutterPlugin, ActivityAw
         }
     }
 
-    override fun onDetachedFromActivityForConfigChanges() {
-        TODO("Not yet implemented")
-    }
+    override fun onDetachedFromActivityForConfigChanges() = Unit
 
-    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-        TODO("Not yet implemented")
-    }
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) = Unit
 
-    override fun onDetachedFromActivity() {
-        TODO("Not yet implemented")
-    }
+    override fun onDetachedFromActivity() = Unit
 }
