@@ -117,9 +117,7 @@ class InstallPluginCustomPlugin() : MethodCallHandler, FlutterPlugin, ActivityAw
         channel.setMethodCallHandler(this)
     }
 
-    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        TODO("Not yet implemented")
-    }
+    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) = Unit
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         activity = binding.activity
