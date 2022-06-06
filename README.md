@@ -1,6 +1,8 @@
 **题记**
   ——  执剑天涯，从你的点滴积累开始，所及之处，必精益求精，即是折腾每一天。
   
+修复app退出时闪退的问
+  
 **重要消息**
 *  [精通点的可以查看这里 精述](https://gitbook.cn/gitchat/author/5ae043915efcf9715e37c733)
 * [Flutter 从入门实践到开发一个APP之UI基础篇  视频](https://edu.csdn.net/course/detail/25543)
